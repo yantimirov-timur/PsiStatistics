@@ -5,7 +5,9 @@ import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiRecursiveElementWalkingVisitor
+import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 import java.io.IOException
 
@@ -17,7 +19,7 @@ class PsiStatistics : AnAction() {
     /**
      * Метод подсчета элементов
      */
-    private fun countStats(list: List<PsiElement>): MutableMap<String, Int> {
+    fun countStats(list: List<PsiElement>): MutableMap<String, Int> {
         val mapLeafString = mutableMapOf<String, Int>()
         for (elem in list) {
             val stringElement = elem.toString()
@@ -30,8 +32,22 @@ class PsiStatistics : AnAction() {
         return mapLeafString
     }
 
+    fun collectPsi(psiFile: PsiFile): MutableList<LeafPsiElement> {
+        val psiLeafElements = mutableListOf<LeafPsiElement>()
+
+        psiFile.accept(object : PsiRecursiveElementWalkingVisitor() {
+            override fun visitElement(element: PsiElement) {
+                super.visitElement(element)
+                if (element is LeafPsiElement && element !is PsiWhiteSpace) {
+                    psiLeafElements.add(element)
+                }
+            }
+        })
+        return psiLeafElements
+    }
+
     /**
-     * Главный метод
+     * Главный метод для работы с action
      */
     override fun actionPerformed(event: AnActionEvent) {
         val psiFile = event.getData(CommonDataKeys.PSI_FILE)
@@ -46,29 +62,15 @@ class PsiStatistics : AnAction() {
                     statFile = psiFilePath?.createChildData("stat", "${psiFile.name}_PsiStat")
                 }
                 Messages.showMessageDialog("File successful created", "Error", Messages.getInformationIcon())
-                val psiLeafElements = mutableListOf<LeafPsiElement>()
 
-                //Сбор PSI элементов
-                psiFile.accept(object : PsiRecursiveElementWalkingVisitor() {
-                    override fun visitElement(element: PsiElement) {
-                        super.visitElement(element)
-                        if (element is LeafPsiElement) {
-                            psiLeafElements.add(element)
-                        }
-                    }
-                })
-                //подсчет статистики
-                val mapLeafString = countStats(psiLeafElements)
-
-                //Заполнение файла
+                val psiLeafElements = collectPsi(psiFile)        //Сбор PSI элементов
+                val mapLeafString = countStats(psiLeafElements)  //подсчет статистики
                 var infoStatistics = ""
-                mapLeafString.forEach { (psiElement, number) -> infoStatistics += "$psiElement - $number\n" }
-
+                mapLeafString.forEach { (psiElement, number) -> infoStatistics += "$psiElement - $number\n" } //Заполнение файла
                 runWriteAction {
                     statFile?.setBinaryContent(infoStatistics.toByteArray())
                 }
-            }
-            catch (ex: IOException) {
+            } catch (ex: IOException) {
                 Messages.showMessageDialog("File already exists", "Error", Messages.getErrorIcon())
             }
         }

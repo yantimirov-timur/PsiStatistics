@@ -7,6 +7,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectBundle
 import com.intellij.openapi.project.getProjectDataPathRoot
 import com.intellij.psi.PsiDirectory
+import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFileFactory
 import com.intellij.testFramework.ParsingTestCase
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
@@ -24,7 +25,9 @@ internal class PsiStatisticsTest{
 
     @Test
     fun test(){
-
+        var l = mutableListOf<PsiElement>()
+        var foo = PsiStatistics()
+        foo.countStats(l)
 
     }
 
