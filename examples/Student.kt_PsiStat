@@ -1,0 +1,16 @@
+PsiElement(class) - 1
+PsiElement(IDENTIFIER) - 9
+PsiElement(LBRACE) - 2
+PsiElement(var) - 2
+PsiElement(EQ) - 3
+PsiElement(OPEN_QUOTE) - 2
+PsiElement(REGULAR_STRING_PART) - 2
+PsiElement(CLOSING_QUOTE) - 2
+PsiElement(INTEGER_LITERAL) - 1
+PsiElement(val) - 1
+PsiElement(DOT) - 1
+PsiElement(fun) - 1
+PsiElement(LPAR) - 2
+PsiElement(RPAR) - 2
+PsiElement(SHORT_TEMPLATE_ENTRY_START) - 1
+PsiElement(RBRACE) - 2
