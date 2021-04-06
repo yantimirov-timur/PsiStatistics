@@ -12,9 +12,6 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement
 import java.io.IOException
 
 class PsiStatistics : AnAction(){
-    /**
-     * Написать тесты
-     */
 
     /**
      * Метод подсчета элементов
