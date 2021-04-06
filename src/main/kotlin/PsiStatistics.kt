@@ -31,7 +31,6 @@ class PsiStatistics : AnAction(){
 
     fun collectPsi(psiFile: PsiFile): MutableList<LeafPsiElement> {
         val psiLeafElements = mutableListOf<LeafPsiElement>()
-
         psiFile.accept(object : PsiRecursiveElementWalkingVisitor() {
             override fun visitElement(element: PsiElement) {
                 super.visitElement(element)

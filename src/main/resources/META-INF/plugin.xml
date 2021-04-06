@@ -1,7 +1,7 @@
 <idea-plugin>
-    <id>com.github.developerutils.kotlin-function-arguments-helper</id>
-    <name>Kotlin Function Arguments Helper</name>
-    <vendor email="ch.graupner@workingdeveloper.net" url="https://github.com/DeveloperUtils">WorkingDeveloper</vendor>
+    <id>psiStatisticCollector</id>
+    <name>Psi Statistic</name>
+    <vendor>Timur Yantimirov</vendor>
 
     <!-- Product and plugin compatibility requirements -->
     <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -9,7 +9,7 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>org.jetbrains.kotlin</depends>
 
-    <description><![CDATA[filled-by-idea-gradle-plugin from README.md]]></description>
+    <description>Plugin collect psi elements in .kt files</description>
     <extensions defaultExtensionNs="com.intellij">
 
     </extensions>
