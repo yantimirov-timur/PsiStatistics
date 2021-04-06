@@ -11,7 +11,7 @@ import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 import java.io.IOException
 
-class PsiStatistics : AnAction() {
+class PsiStatistics : AnAction(){
     /**
      * Написать тесты
      */
@@ -38,6 +38,7 @@ class PsiStatistics : AnAction() {
         psiFile.accept(object : PsiRecursiveElementWalkingVisitor() {
             override fun visitElement(element: PsiElement) {
                 super.visitElement(element)
+
                 if (element is LeafPsiElement && element !is PsiWhiteSpace) {
                     psiLeafElements.add(element)
                 }
@@ -55,16 +56,18 @@ class PsiStatistics : AnAction() {
         var statFile: VirtualFile? = null
 
         if (psiFile == null || psiFile.language.id != "kotlin") {
-            Messages.showMessageDialog("Plugin work with .kt files", "Error", Messages.getErrorIcon())
+            Messages.showMessageDialog("Plugin work with .kt files", "File created", Messages.getErrorIcon())
         } else {
             try {
                 runWriteAction {
-                    statFile = psiFilePath?.createChildData("stat", "${psiFile.name}_PsiStat")
+                    statFile = psiFilePath?.createChildData("Statistic", "${psiFile.name}_PsiStat")
                 }
                 Messages.showMessageDialog("File successful created", "Error", Messages.getInformationIcon())
 
                 val psiLeafElements = collectPsi(psiFile)        //Сбор PSI элементов
-                val mapLeafString = countStats(psiLeafElements)  //подсчет статистики
+                val mapLeafString = countStats(psiLeafElements)
+
+               //подсчет статистики
                 var infoStatistics = ""
                 mapLeafString.forEach { (psiElement, number) -> infoStatistics += "$psiElement - $number\n" } //Заполнение файла
                 runWriteAction {
@@ -75,4 +78,5 @@ class PsiStatistics : AnAction() {
             }
         }
     }
+
 }

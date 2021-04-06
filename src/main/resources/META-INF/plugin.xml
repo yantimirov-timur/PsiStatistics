@@ -1,20 +1,21 @@
 <idea-plugin>
-    <id>org.example.TestPlugin</id>
-    <name>PsiStatistis</name>
-    <vendor>Yantimirov-Timur</vendor>
+    <id>com.github.developerutils.kotlin-function-arguments-helper</id>
+    <name>Kotlin Function Arguments Helper</name>
+    <vendor email="ch.graupner@workingdeveloper.net" url="https://github.com/DeveloperUtils">WorkingDeveloper</vendor>
 
-    <description>Plugin collect PSi elements statistics in file </description>
-    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
+    <!-- Product and plugin compatibility requirements -->
+    <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
+    <description><![CDATA[filled-by-idea-gradle-plugin from README.md]]></description>
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-    </extensions>
 
+    </extensions>
     <actions>
-        <!-- Add your actions here -->
-        <action id="PsiStatistics" class="PsiStatistics" text="ShowStat">
+        <action id="PsiStatistics"
+                class="PsiStatistics" text="ShowStat">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl Q" second-keystroke="ctrl U"/>
         </action>
     </actions>

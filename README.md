@@ -1,47 +1,50 @@
-# PsiStatistics
+# ![Kotlin Function Arguments Helper](src/main/resources/META-INF/pluginIcon.svg) kotlin-function-arguments-helper 
+
+![Build](https://github.com/DeveloperUtils/kotlin-function-arguments-helper/workflows/Build/badge.svg)
+[![Version](https://img.shields.io/jetbrains/plugin/v/com.github.developerutils.kotlin-function-arguments-helper.svg)](https://plugins.jetbrains.com/plugin/14168-kotlin-function-arguments-helper)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/com.github.developerutils.kotlin-function-arguments-helper.svg)](https://plugins.jetbrains.com/plugin/14168-kotlin-function-arguments-helper)
+
+<!-- Plugin description -->
+IntelliJ plugin that provides intention action for constructors or functions to fill in arguments with name and a default value.
 
 
-## Описание
-Плагин собирает статистику самых используемых Psi элементов в .kt файле
+<a target="_blank" href="https://user-images.githubusercontent.com/774381/79955782-8f69a580-847f-11ea-94fa-c07a8816d7f8.gif">
+  <img src="https://user-images.githubusercontent.com/774381/79955782-8f69a580-847f-11ea-94fa-c07a8816d7f8.gif" alt="kotlin-function-arguments-helper-demo animation" style="max-width:100%;"/>
+</a>
 
-## Подключение
-1. Зайдите в последние релизы этого репозитория
-2. Скачайте .zip файл с плагином
-3. Далее в IDEA зайдите в `Settings` -> `Plugin` ->*`значок шестеренки`* -> `Install Plugin From Disk`
-4. Выберите скачанный .zip файл
+<!-- Plugin description end -->
 
-## Использование
-Для запуска работы плагина откройте любой .kt файл, далее нажмите сочетание клавив Ctrl Q + Ctrl U.
-Возле вашего файла создастся .txt файл с собранной статистикой
+Inspired by and extended from [Kotlin Fill Class Plugin](https://github.com/suusan2go/kotlin-fill-class)
 
-## Визуализация статистики
- - Для этого перейдите realeases и скачайте оттуда последний релиз "graphic_build.py" (*исходный код приложения находится в пакете "visualisator"*)
- - Для запуска визуализации на компьютере должен быть установен Python 3.8+ и библиотека для построения графиков matplotlib
- - Откройте командную строку Windows. 
- - Введите: python graphic_build.py --f <Имя файла с собранной статистикой>(*файл должен оканчиваться на Psi_Stat*)
- - В этой же директории появится .png файл с графиком
- - *Желательно, чтобы консольное приложение и файл с собранной статистикой были в одной директории, чтобы не прописывать пути к файлам вручную*
+## Installation
 
-## Примеры
-*Все файлы, с которых собиралась статистика и сама статистика находятся в пакете examples*
+- Using IDE built-in plugin system:
+  
+  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "kotlin-function-arguments-helper"</kbd> >
+  <kbd>Install Plugin</kbd>
+  
+- Manually:
 
-В качестве примера использованы:
- - маленький файл с одним небольшним классом 
- - один большой файл из проекта с задачами на курс `Алгоритмы и Структуры данных`
+  Download the [latest release](https://github.com/WorkingDevel/kotlin-function-arguments-helper/releases/latest) and install it manually using
+  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
 
- - График файла с небольшим классом:  
-![alt-текст](https://github.com/yantimirov-timur/PsiStatistics/blob/master/examples/plots/PsiStatisticStudent.kt_PsiStat.png)
+### Build & Install from Disk
 
- - График файла с задачами
-![alt-текст](https://github.com/yantimirov-timur/PsiStatistics/blob/master/examples/plots/PsiStatisticKtBinarySearchTree.kt_PsiStat.png)
+0. Checkout repository `git clone https://github.com/DeveloperUtils/kotlin-function-arguments-helper.git`
+   or `git clone git@github.com:DeveloperUtils/kotlin-function-arguments-helper.git`
+1. Build this plugin `./gradlew build`
+2. Install the plugin from `./build/distributions/Kotlin Function Arguments Helper*.zip`
+   with <kbd>Install plugin from disk</kbd> in IDEA plugin manager
 
+## Thanks
 
-## Дополнительная информация
-Статистика собирается не по всем PSI элементам, а только по `LeafPsiElements`. То есть, только по листьям этого дерева,
-так как именно они несут наиболее полезную и содержательную информацию. Также из сбора статистики листьев был умышленно исключен `PsiWhiteSpace`, так как 
-этот элемент не несет никакой полезной информации и при этом его "вес" значительно больше других элементов (примерно в 2-3 раза), что мешало построению графиков
+- [@suunsa](https://github.com/suunsan2go) For the plugin idea and development of it.
+- [@t-kameyama](https://github.com/t-kameyama) Fill function call arguments [#17](https://github.com/suusan2go/kotlin-fill-class/pull/17)
+- [@shiraji](https://github.com/shiraji) Convert to intention & Support non-empty constructor [#6](https://github.com/suusan2go/kotlin-fill-class/pull/6)
+- [@Pluu](https://github.com/Pluu) [@naofumi-fujii](https://github.com/naofumi-fujii]) fix #2 Double type fill error [#3](https://github.com/suusan2go/kotlin-fill-class/pull/3)
 
-## Итоговый анализ
-Наиболее популярным элементом в исследуемых файлах был `IDENTIFIER`, `LPAR`, `RPAR`, `EQ`.
-Также был проведен анализ всех PSI элементов. Наиболее частым является `BLOCK`, `CALL_EXPRESSION`, `OPERATION_REFERENCE`, `MODIFIER_LIST`.
+---
+Plugin based on the [IntelliJ Platform Plugin Template][template].
+
+[template]: https://github.com/JetBrains/intellij-platform-plugin-template
