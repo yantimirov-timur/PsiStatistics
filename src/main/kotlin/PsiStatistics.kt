@@ -11,8 +11,7 @@ import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 import java.io.IOException
 
-class PsiStatistics : AnAction(){
-
+class PsiStatistics : AnAction() {
     /**
      * Метод подсчета элементов
      */
@@ -34,7 +33,6 @@ class PsiStatistics : AnAction(){
         psiFile.accept(object : PsiRecursiveElementWalkingVisitor() {
             override fun visitElement(element: PsiElement) {
                 super.visitElement(element)
-
                 if (element is LeafPsiElement && element !is PsiWhiteSpace) {
                     psiLeafElements.add(element)
                 }
@@ -60,12 +58,10 @@ class PsiStatistics : AnAction(){
                 }
                 Messages.showMessageDialog("File successful created", "File created", Messages.getInformationIcon())
 
-                val psiLeafElements = collectPsi(psiFile)        //Сбор PSI элементов
-                val mapLeafString = countStats(psiLeafElements) //Подсчет статистики
-
-               //подсчет статистики
-                var infoStatistics = ""
-                mapLeafString.forEach { (psiElement, number) -> infoStatistics += "$psiElement - $number\n" } //Заполнение файла
+                val psiLeafElements = collectPsi(psiFile)//Сбор PSI элементов
+                val stringMapPsiLeafElements = countStats(psiLeafElements) //Подсчет статистики
+                var infoStatistics = ""   //подсчет статистики
+                stringMapPsiLeafElements.forEach { (psiElement, number) -> infoStatistics += "$psiElement - $number\n" } //Заполнение файла
                 runWriteAction {
                     statFile?.setBinaryContent(infoStatistics.toByteArray())
                 }
