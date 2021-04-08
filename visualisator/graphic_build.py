@@ -14,12 +14,18 @@ def build_graphics(f):
         new_line = line.split(' - ')
         all_statistics[test] = int(new_line[1])
 
+    sorted_all_statistics = {}
+    sorted_keys = sorted(all_statistics, key=all_statistics.get)
+
+    for w in sorted_keys:
+        sorted_all_statistics[w] = all_statistics[w]
+
     elements = []
     numbers = []
-    for key in all_statistics:
+    for key in sorted_all_statistics:
         elements.append(all_statistics[key])
 
-    for key in all_statistics:
+    for key in sorted_all_statistics:
         numbers.append(key)
 
     fig, ax = plt.subplots(figsize=(14.5, len(elements) / 2))
